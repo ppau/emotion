@@ -1,0 +1,7 @@
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', '/' %></li>
+  <li><%= link_to @group.name, @group %></li>
+  <% if defined? current %>
+    <li class="active"><%= current %></li>
+  <% end %>
+</ol>

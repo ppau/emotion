@@ -1,28 +1,25 @@
-<h1><%= @group.name %></h1>
+<%= render 'breadcrumbs' %>
 
 <% if @group.motions.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>Text</th>
-        <th>Author</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
 
-    <tbody>
-      <% @group.motions.each do |motion| %>
-        <tr>
-          <td><%= motion.text %></td>
-          <td><%= motion.author.display_name %></td>
-          <td><%= link_to 'Edit', edit_group_motion_path(@group, motion) %></td>
-          <td><%= link_to 'Show', [@group, motion] %></td>
-          <td><%= link_to 'Destroy', [@group, motion], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
+  <% @group.motions.each do |motion| %>
+    <%= div_for(@group, motion) do %>
+      <div class="actions">
+        <span><%= link_to 'Edit', edit_group_motion_path(@group, motion) %></span>
+        <span><%= link_to 'Destroy', [@group, motion], method: :delete, data: { confirm: 'Are you sure?' } %></span>
+      </div>
+      <%= link_to [@group, motion] do %>
+        <div class="well">
+          <blockquote><%= motion.text %></blockquote>
+          <p>
+          Author: <b><%= motion.author.display_name %></b>
+          </p>
+        </div>
       <% end %>
-    </tbody>
-  </table>
+    <% end %>
+  <% end %>
+
 
 <% end %>
 
-<%= link_to 'New Motion', new_group_motion_path(@group) %>
+<%= link_to 'New Motion', new_group_motion_path(@group), class: 'btn btn-primary' %>
