@@ -10,6 +10,34 @@
   <%= @motion.text %>
 </p>
 
+<p>
+  <strong>Time:</strong>
+  <%= @motion.created_at %>
+</p>
+
 <p class="actions">
 <%= link_to 'Edit', edit_group_motion_path(@group, @motion) %>
 </p>
+
+<% if @motion.votes.any? %>
+
+<h2>Votes</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Person</td>
+      <th>Response</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @motion.votes.each do |vote| %>
+      <tr>
+        <td><%= vote.user.display_name %></td>
+        <td><%= vote.display_response %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>
