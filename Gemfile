@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.1.0.rc1'
 
+#gem 'haml-rails'                                         # html templating
+#gem 'html2haml', group: :command_line                    # command line tool
 gem 'capistrano-rails', group: :command_line             # deploy recipes
 gem 'coffee-rails'                                       # coffeescript
 gem 'cucumber', group: :test, require: false             # acceptance tests
@@ -9,9 +11,7 @@ gem 'database_cleaner', group: :test                     # manage database trunc
 gem 'devise'                                             # user account management
 gem 'email_spec', group: :test                           # nice test assertions for emails
 gem 'factory_girl_rails', group: :test                   # convenient model recipes
-gem 'haml-rails'                                         # html templating
 gem 'headless', group: :test, require: false             # lets us run firefox inside a virtual display on ci
-gem 'html2haml', group: :command_line                    # command line tool
 gem 'jazz_hands', group: [:test, :development]           # debugger and other nice stuff
 gem 'jquery-rails'                                       # jquery assets
 gem 'launchy', group: :test, require: false              # for show_page
@@ -32,6 +32,7 @@ gem 'turbolinks'                                         # faster page navigatio
 gem 'twitter-bootstrap-rails'                            # precanned baseline styles
 gem 'uglifier'                                           # minifier
 
+# gem 'friendly_id'
 # gem 'quiet_assets'     # don't log asset pipeline requests
 # gem 'rack-livereload'  # transparent livereload client
 # gem 'guard-livereload' # reload the web browser when source files change
