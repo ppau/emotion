@@ -1,40 +1,40 @@
 source 'https://rubygems.org'
 
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0.rc1'
-# Use postgresql as the database for Active Record
-gem 'pg'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.1'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'capistrano-rails', group: :command_line
+gem 'coffee-rails'
+gem 'cucumber', group: :test, require: false    # acceptance tests
+gem 'database_cleaner', group: :test            # manage database truncation/transactions
+gem 'devise'
+gem 'email_spec', group: :test                  # nice test assertions for emails
+gem 'factory_girl_rails', group: :test          # convenient model recipes
+gem 'haml-rails'
+gem 'headless', group: :test, require: false    # lets us run firefox inside a virtual display on ci
+gem 'html2haml', group: :command_line
+gem 'jazz_hands', group: [:test, :development]
+gem 'jquery-rails'                              # jquery assets
+gem 'launchy', group: :test, require: false     # for show_page
+gem 'pg'                                        # postgresql driver
+gem 'puma', group: :command_line
+gem 'rspec-rails', group: :test, require: false # test framework
+gem 'sass-rails'
+gem 'schema_plus'
+gem 'sdoc', group: :doc
+gem 'simple_form'
+gem 'simplecov', group: :test, require: false   # measure test coverage
+gem 'spring', group: :development
+gem 'spring-commands-rspec', group: :command_line
+gem 'timecop', group: :test, require: false     # system time stubbing
 gem 'turbolinks'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'uglifier'
 
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
+# gem 'quiet_assets'     # don't log asset pipeline requests
+# gem 'rack-livereload'  # transparent livereload client
+# gem 'guard-livereload' # reload the web browser when source files change
+# gem 'guard-rspec'
+# gem 'metric_fu'        # static code analysis
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
+if `uname` =~ /Darwin/
+  gem 'rb-fsevent', group: :test, require: false # efficiently monitoring the file system
+end
