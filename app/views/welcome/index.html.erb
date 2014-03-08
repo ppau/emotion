@@ -1,0 +1,13 @@
+
+This app manages motions in a political party.
+
+<% if current_user %>
+  <% if current_user.group_memberships.any? %>
+    <h2>Groups</h2>
+    <ul>
+      <% current_user.group_memberships.each do |membership| %>
+        <li><%= link_to membership.group.name, membership.group %></li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
