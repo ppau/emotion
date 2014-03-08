@@ -1,5 +1,13 @@
+<% if current_user %>
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', '/' %></li>
+  </ol>
+<% end %>
 
-This app manages motions in a political party.
+<p>
+  This app manages motions in a political party.
+</p>
+
 
 <% if current_user %>
   <% if current_user.group_memberships.any? %>
