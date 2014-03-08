@@ -2,7 +2,7 @@
 
 <p>
   <strong>Author:</strong>
-  <%= @motion.author.display_name %>
+  <%= @motion.author.name %>
 </p>
 
 <p>
@@ -33,7 +33,7 @@
   <tbody>
     <% @motion.votes.each do |vote| %>
       <tr>
-        <td><%= vote.user.display_name %></td>
+        <td><%= vote.user.name %></td>
         <td><%= vote.display_response %></td>
       </tr>
     <% end %>
