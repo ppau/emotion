@@ -1,5 +1,5 @@
 
 rails generate scaffold group name:string uuid:string -y false -j false --helper
-rails generate scaffold users_groups user_id:integer group_id:integer -y false -j false --helper
+rails generate model users_groups user_id:integer group_id:integer
 rails generate scaffold motion group_id:integer author_id:integer -y false -j false --helper
 rails generate scaffold motion_responses motion_id:integer user_id:integer response:string vote_token:string -y false -j false --helper
