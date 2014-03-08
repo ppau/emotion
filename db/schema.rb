@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308130133) do
+ActiveRecord::Schema.define(version: 20140308132553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,21 @@ ActiveRecord::Schema.define(version: 20140308130133) do
     t.index ["user_id"], :name => "fk__motions_user_id"
     t.foreign_key ["group_id"], "groups", ["id"], :on_update => :cascade, :on_delete => :cascade, :name => "fk_motions_group_id"
     t.foreign_key ["user_id"], "users", ["id"], :on_update => :cascade, :on_delete => :restrict, :name => "fk_motions_user_id"
+  end
+
+  create_table "votes", force: true do |t|
+    t.integer  "motion_id",  null: false
+    t.integer  "user_id",    null: false
+    t.string   "response"
+    t.string   "vote_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["motion_id", "user_id"], :name => "index_votes_on_motion_id_and_user_id", :unique => true
+    t.index ["motion_id"], :name => "fk__votes_motion_id"
+    t.index ["user_id"], :name => "fk__votes_user_id"
+    t.index ["vote_token"], :name => "index_votes_on_vote_token", :unique => true
+    t.foreign_key ["motion_id"], "motions", ["id"], :on_update => :cascade, :on_delete => :cascade, :name => "fk_votes_motion_id"
+    t.foreign_key ["user_id"], "users", ["id"], :on_update => :cascade, :on_delete => :restrict, :name => "fk_votes_user_id"
   end
 
 end
