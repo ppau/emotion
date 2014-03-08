@@ -9,10 +9,11 @@
  * compiled file so the styles you add here take precedence over styles defined in any styles
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
- *
- *= require_tree .
- *= require bootstrap
- *= require_self
+ */
+
+//= require_tree .
+//= require bootstrap
+//= require_self
 
 body
   padding-top: 20px
@@ -24,4 +25,12 @@ a.well
   color: inherit
   &:hover
     background-color: #eee
-    background-color: #eee
+
+.navbar
+  .user-icon
+    margin-right: 0.5em
+
+.navbar-brand
+  padding-top: 5px
+  padding-bottom: 5px
+  height: 60px
