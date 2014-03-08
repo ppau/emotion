@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.1.0.rc1'
 
+gem 'bootstrap-sass'                                     # precanned baseline styles
 gem 'capistrano-rails', group: :command_line             # deploy recipes
 gem 'coffee-rails'                                       # coffeescript
 gem 'cucumber', group: :test, require: false             # acceptance tests
@@ -13,7 +14,6 @@ gem 'headless', group: :test, require: false             # lets us run firefox i
 gem 'jazz_hands', group: [:test, :development]           # debugger and other nice stuff
 gem 'jquery-rails'                                       # jquery assets
 gem 'launchy', group: :test, require: false              # for show_page
-gem 'less-rails'                                         # for processing twitter bootstrap
 gem 'pg'                                                 # postgresql driver
 gem 'puma', group: :command_line                         # web server
 gem 'quiet_assets', group: [:development, :test]         # don't log asset pipeline requests
@@ -28,7 +28,6 @@ gem 'spring-commands-rspec', group: :command_line        # run rspec under sprin
 gem 'therubyracer', group: :command_line, require: false # javascript v8
 gem 'timecop', group: :test, require: false              # system time stubbing
 gem 'turbolinks'                                         # faster page navigation with javascript
-gem 'twitter-bootstrap-rails'                            # precanned baseline styles
 gem 'uglifier'                                           # minifier
 
 # gem 'friendly_id'
