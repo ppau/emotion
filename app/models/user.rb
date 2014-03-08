@@ -8,4 +8,16 @@ class User < ActiveRecord::Base
   has_many :groups, through: :group_memberships
 
   validates :display_name, presence: true, length: { minimum: 3, maximum: 20 }
+
+  private
+
+  before_create :add_example_group
+
+  def add_example_group
+    groups << example_group
+  end
+
+  def example_group
+    @example_group ||= Group.find_by_name!('Example')
+  end
 end
