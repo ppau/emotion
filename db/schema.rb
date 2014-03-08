@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308115853) do
+ActiveRecord::Schema.define(version: 20140308130133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,18 @@ ActiveRecord::Schema.define(version: 20140308115853) do
     t.index ["user_id"], :name => "fk__group_memberships_user_id"
     t.foreign_key ["group_id"], "groups", ["id"], :on_update => :cascade, :on_delete => :cascade, :name => "fk_group_memberships_group_id"
     t.foreign_key ["user_id"], "users", ["id"], :on_update => :cascade, :on_delete => :cascade, :name => "fk_group_memberships_user_id"
+  end
+
+  create_table "motions", force: true do |t|
+    t.text     "text",       null: false
+    t.integer  "group_id",   null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["group_id"], :name => "fk__motions_group_id"
+    t.index ["user_id"], :name => "fk__motions_user_id"
+    t.foreign_key ["group_id"], "groups", ["id"], :on_update => :cascade, :on_delete => :cascade, :name => "fk_motions_group_id"
+    t.foreign_key ["user_id"], "users", ["id"], :on_update => :cascade, :on_delete => :restrict, :name => "fk_motions_user_id"
   end
 
 end

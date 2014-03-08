@@ -5,5 +5,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :group_memberships
-  has_many :groups, through: :users_groups
+  has_many :groups, through: :group_memberships
 end
