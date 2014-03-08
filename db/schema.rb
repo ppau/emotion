@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308111109) do
+ActiveRecord::Schema.define(version: 20140308113128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "groups", force: true do |t|
+    t.string   "name",       null: false
+    t.string   "uuid",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["name"], :name => "index_groups_on_name"
+    t.index ["uuid"], :name => "index_groups_on_uuid", :unique => true
+  end
 
   create_table "users", force: true do |t|
     t.string   "display_name",                        null: false
