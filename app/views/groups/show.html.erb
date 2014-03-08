@@ -8,13 +8,11 @@
         <span><%= link_to 'Edit', edit_group_motion_path(@group, motion) %></span>
         <span><%= link_to 'Destroy', [@group, motion], method: :delete, data: { confirm: 'Are you sure?' } %></span>
       </div>
-      <%= link_to [@group, motion] do %>
-        <div class="well">
-          <blockquote><%= motion.text %></blockquote>
-          <p>
-          Author: <b><%= motion.author.display_name %></b>
-          </p>
-        </div>
+      <%= link_to [@group, motion], class: 'well' do %>
+        <blockquote><%= motion.text %></blockquote>
+        <p>
+        Author: <b><%= motion.author.display_name %></b>
+        </p>
       <% end %>
     <% end %>
   <% end %>

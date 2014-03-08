@@ -27,7 +27,12 @@
   <div class="collapse navbar-collapse" id="menu">
     <ul class="nav navbar-nav navbar-right">
       <% if current_user %>
-        <li> <%= link_to current_user.display_name, edit_user_registration_path %> </li>
+        <li>
+        <%= link_to edit_user_registration_path do %>
+          <span class="glyphicon glyphicon-user"></span>
+          <span class="user-name"><%= current_user.display_name %></span>
+        <% end %>
+        </li>
         <li> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %> </li>
       <% else %>
         <li> <%= link_to 'Register', new_user_registration_path %> </li>
