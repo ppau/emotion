@@ -3,7 +3,7 @@ module UuidHelper
 
   included do
     def to_param
-      self.uuid
+      uuid
     end
 
     private
