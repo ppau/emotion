@@ -12,7 +12,7 @@ gem 'database_cleaner', group: :test                     # manage database trunc
 gem 'devise'                                             # user account management
 gem 'email_spec', group: :test                           # nice test assertions for emails
 gem 'factory_girl_rails', group: :test                   # convenient model recipes
-gem 'guard-livereload'                                   # reload the web browser when source files change
+gem 'guard-livereload', group: :development              # reload the web browser when source files change
 gem 'headless', group: :test, require: false             # lets us run firefox inside a virtual display on ci
 gem 'jazz_hands', group: [:test, :development]           # debugger and other nice stuff
 gem 'jquery-rails'                                       # jquery assets
