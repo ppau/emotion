@@ -13,37 +13,41 @@
 
 <div class="container">
 
-<nav class="navbar navbar-default" role="navigation"> <div class="container-fluid">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <%= link_to root_path, class: 'navbar-brand' do %>
-      <%= image_tag 'ppauLogo-australia_bw.svg', height: '50' %>
-    <% end %>
-  </div>
+<div class="clearfix">
+  <%= link_to root_path, class: 'navbar-brand pull-left' do %>
+    <h1 class="site-title"><span>Pirate Party Australia</span></h1>
+  <% end %>
 
-  <div class="collapse navbar-collapse" id="menu">
-    <ul class="nav navbar-nav navbar-right">
-      <% if current_user %>
-        <li>
-        <%= link_to edit_user_registration_path do %>
-          <span class="user-icon glyphicon glyphicon-user"></span>
-          <span class="user-name"><%= current_user.name %></span>
+  <nav class="navbar navbar-default pull-right" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
+          <li>
+          <%= link_to edit_user_registration_path do %>
+            <span class="user-icon glyphicon glyphicon-user"></span>
+            <span class="user-name"><%= current_user.name %></span>
+          <% end %>
+          </li>
+          <li> <%= link_to 'Sign out', destroy_user_session_path, method: :delete %> </li>
+        <% else %>
+          <li> <%= link_to new_user_registration_path do %><span class="user-icon glyphicon glyphicon-user"></span> Register<% end %> </li>
+          <li> <%= link_to 'Sign in', new_user_session_path %> </li>
         <% end %>
-        </li>
-        <li> <%= link_to 'Sign out', destroy_user_session_path, method: :delete %> </li>
-      <% else %>
-        <li> <%= link_to 'Register', new_user_registration_path %> </li>
-        <li> <%= link_to 'Sign in', new_user_session_path %> </li>
-      <% end %>
-    </ul>
+      </ul>
+    </div>
   </div>
+  </nav>
 </div>
-</nav>
 
 <%= yield %>
 
