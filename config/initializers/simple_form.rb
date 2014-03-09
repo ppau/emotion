@@ -1,4 +1,4 @@
-inputs = %w[
+%w[
   CollectionSelectInput
   DateTimeInput
   FileInput
@@ -8,32 +8,23 @@ inputs = %w[
   RangeInput
   StringInput
   TextInput
-]
-
-inputs.each do |input_type|
+].each do |input_type|
   superclass = "SimpleForm::Inputs::#{input_type}".constantize
-
-  new_class = Class.new(superclass) do
-    def input_html_classes
-      super.push('form-control')
+  superclass.class_eval do
+    def input_html_classes_with_form_control
+      input_html_classes_without_form_control.push('form-control')
     end
+    alias_method_chain :input_html_classes, :form_control
   end
-
-  Object.const_set(input_type, new_class)
 end
 
-# Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
   config.boolean_style = :nested
 
   config.button_class = 'btn btn-default'
+  config.label_class = 'control-label'
 
-  config.wrappers :bootstrap3,
-    tag: 'div',
-    class: 'form-group',
-      error_class: 'has-error',
-      defaults: { input_html: { class: 'default_class' } } do |b|
-
+  config.wrappers :bootstrap3, tag: 'div', class: 'form-group', error_class: 'has-error', defaults: { input_html: { class: 'default_class' } } do |b|
     b.use :html5
     b.use :min_max
     b.use :maxlength
@@ -52,7 +43,7 @@ SimpleForm.setup do |config|
     b.use :placeholder
     b.wrapper tag: 'div', class: 'controls' do |input|
       input.wrapper tag: 'div', class: 'input-group' do |prepend|
-    prepend.use :label , class: 'input-group-addon' ###Please note setting class here fro the label does not currently work (let me know if you know a workaround as this is the final hurdle)
+        prepend.use :label , class: 'input-group-addon' ###Please note setting class here fro the label does not currently work (let me know if you know a workaround as this is the final hurdle)
         prepend.use :input
       end
       input.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
@@ -66,7 +57,7 @@ SimpleForm.setup do |config|
     b.wrapper tag: 'div', class: 'controls' do |input|
       input.wrapper tag: 'div', class: 'input-group' do |prepend|
         prepend.use :input
-    prepend.use :label , class: 'input-group-addon' ###Please note setting class here fro the label does not currently work (let me know if you know a workaround as this is the final hurdle)
+        prepend.use :label , class: 'input-group-addon' ###Please note setting class here fro the label does not currently work (let me know if you know a workaround as this is the final hurdle)
       end
       input.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
       input.use :error, wrap_with: { tag: 'span', class: 'help-block has-error' }
