@@ -19,9 +19,9 @@
 <%= link_to 'Edit', edit_group_motion_path(@group, @motion) %>
 </p>
 
-<% vote = @motion.vote_for_user(current_user) %>
+<% if vote = @motion.vote_for_user(current_user) %>
 
-<% if @motion.voted?(current_user) %>
+  <% if vote.response.present? %>
   You have responded to this vote with: <%= vote.response %>
 <% else %>
   You have not yet responded to this vote.
@@ -32,6 +32,15 @@
 <%= link_to 'No', group_motion_vote_no_path(@group, @motion, vote), class: 'btn btn-lg btn-danger' %>
 <%= link_to 'Abstain', group_motion_abstain_path(@group, @motion, vote), class: 'btn btn-lg btn-default' %>
 </div>
+
+<% else %>
+
+<p>
+You are not able to vote in this motion. This is most likely because you were
+not a member of this group when the motion was created.
+</p>
+
+<% end %>
 
 <% if @motion.votes.any? %>
 
