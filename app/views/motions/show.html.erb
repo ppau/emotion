@@ -1,20 +1,6 @@
 <%= render 'breadcrumbs', current: link_to('Viewing Motion', [@group, @motion]) %>
 
-<div class="clearfix">
-  <div class="btn-group pull-right">
-    <% if @motion.user == current_user %>
-      <%= link_to 'Edit', edit_group_motion_path(@group, @motion), class: 'btn btn-default' %>
-      <%= link_to 'Close', '#', class: 'btn btn-info' %>
-      <%= link_to 'Destroy', [@group, @motion], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-    <% end %>
-  </div>
-
-  <h2 class="motion-title pull-left"><%= @motion.name %></h2>
-</div>
-
-<blockquote><%= @motion.text %>
-<footer>created by <%= @motion.author.name %> <%= time_ago_in_words(@motion.created_at) %> ago</footer>
-</blockquote>
+<%= render 'item', motion: @motion, actions: true %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -56,11 +42,11 @@
 
   <div class="panel panel-default">
     <div class="panel-heading clearfix">
-      <h3 class="panel-title pull-left">Votes</h3>
+      <h3 class="panel-title pull-left">Other Votes</h3>
       <div class="pull-right">
-        Yes: <%= @motion.num_votes_yes %>
-        No: <%= @motion.num_votes_no %>
-        Abstain: <%= @motion.num_votes_abstain %>
+        <%= @motion.num_votes_yes %> yes,
+        <%= @motion.num_votes_no %> no,
+        <%= @motion.num_votes_abstain %> abstain
       </div>
     </div>
     <div class="panel-body">

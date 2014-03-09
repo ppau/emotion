@@ -3,17 +3,7 @@
 <% if @group.motions.any? %>
 
   <% @group.motions.each do |motion| %>
-    <%= div_for(@group, motion) do %>
-      <%= link_to [@group, motion], class: 'well' do %>
-        <blockquote><%= motion.text %></blockquote>
-        <div class="motion-author">
-        Author: <b><%= motion.author.name %></b>
-        </div>
-        <div class="motion-timestamp">
-          Created <%= time_ago_in_words(motion.created_at) %> ago
-        </div>
-      <% end %>
-    <% end %>
+    <%= render 'motions/item', motion: motion %>
   <% end %>
 <% end %>
 
