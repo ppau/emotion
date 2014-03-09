@@ -4,10 +4,6 @@
 
   <% @group.motions.each do |motion| %>
     <%= div_for(@group, motion) do %>
-      <div class="actions">
-        <span><%= link_to 'Edit', edit_group_motion_path(@group, motion) %></span>
-        <span><%= link_to 'Destroy', [@group, motion], method: :delete, data: { confirm: 'Are you sure?' } %></span>
-      </div>
       <%= link_to [@group, motion], class: 'well' do %>
         <blockquote><%= motion.text %></blockquote>
         <div class="motion-author">

@@ -1,72 +1,95 @@
 <%= render 'breadcrumbs', current: link_to('Viewing Motion', [@group, @motion]) %>
 
-<p>
-  <strong>Author:</strong>
-  <%= @motion.author.name %>
-</p>
+<div class="clearfix">
+  <div class="btn-group pull-right">
+    <% if @motion.user == current_user %>
+      <%= link_to 'Edit', edit_group_motion_path(@group, @motion), class: 'btn btn-default' %>
+      <%= link_to 'Close', '#', class: 'btn btn-info' %>
+      <%= link_to 'Destroy', [@group, @motion], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    <% end %>
+  </div>
 
-<p>
-  <strong>Text:</strong>
-  <%= @motion.text %>
-</p>
-
-<p>
-  <strong>Time:</strong>
-  <%= @motion.created_at %> (<%= time_ago_in_words(@motion.created_at) %> ago)
-</p>
-
-<p class="actions">
-<%= link_to 'Edit', edit_group_motion_path(@group, @motion) %>
-</p>
-
-<% if vote = @motion.vote_for_user(current_user) %>
-
-  <% if vote.response.present? %>
-  You have responded to this vote with: <%= vote.response %>
-<% else %>
-  You have not yet responded to this vote.
-<% end %>
-
-<div>
-<%= link_to 'Yes', group_motion_vote_yes_path(@group, @motion), class: 'btn btn-lg btn-success' %>
-<%= link_to 'No', group_motion_vote_no_path(@group, @motion), class: 'btn btn-lg btn-danger' %>
-<%= link_to 'Abstain', group_motion_abstain_path(@group, @motion), class: 'btn btn-lg btn-default' %>
+  <h2 class="motion-title pull-left"><%= @motion.name %></h2>
 </div>
 
-<% else %>
+<blockquote><%= @motion.text %>
+<footer>created by <%= @motion.author.name %> <%= time_ago_in_words(@motion.created_at) %> ago</footer>
+</blockquote>
 
-<p>
-You are not able to vote in this motion. This is most likely because you were
-not a member of this group when the motion was created.
-</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Your Vote</h3>
+  </div>
+  <div class="panel-body">
 
-<% end %>
+    <% if vote = @motion.vote_for_user(current_user) %>
+
+      <% if vote.response.present? %>
+        <p>
+        You have already responded to this vote with: <%= vote.response %>.
+        You can change your vote until the motion is closed.
+        </p>
+      <% else %>
+        <p>
+        You have not yet responded to this vote.
+        </p>
+      <% end %>
+
+      <div class="btn-group">
+        <%= link_to 'Yes', group_motion_vote_yes_path(@group, @motion), class: "btn btn-lg btn-default #{vote.yes? ? 'active' : ''}" %>
+        <%= link_to 'No', group_motion_vote_no_path(@group, @motion), class: "btn btn-lg btn-default #{vote.no? ? 'active' : ''}" %>
+        <%= link_to 'Abstain', group_motion_abstain_path(@group, @motion), class: "btn btn-lg btn-default #{vote.abstain? ? 'active' : ''}" %>
+      </div>
+
+    <% else %>
+
+      <p>
+      You are not able to vote in this motion. This is most likely because you were
+      not a member of this group when the motion was created.
+      </p>
+
+    <% end %>
+  </div>
+</div>
 
 <% if @motion.votes.any? %>
 
-<h2>Votes</h2>
+  <div class="panel panel-default">
+    <div class="panel-heading clearfix">
+      <h3 class="panel-title pull-left">Votes</h3>
+      <div class="pull-right">
+        Yes: <%= @motion.num_votes_yes %>
+        No: <%= @motion.num_votes_no %>
+        Abstain: <%= @motion.num_votes_abstain %>
+      </div>
+    </div>
+    <div class="panel-body">
 
-Yes: <%= @motion.num_votes_yes %>
-No: <%= @motion.num_votes_no %>
-Abstain: <%= @motion.num_votes_abstain %>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="<%= @motion.votes.filled.count %>" aria-valuemin="0" aria-valuemax="<%= %>" style="width: <%= @motion.percent_complete %>%;">
+          <%= @motion.percent_complete %>%
+        </div>
+      </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Person</td>
-      <th>Response</td>
-      <th>Updated At</td>
-    </tr>
-  </thead>
-  <tbody>
-    <% @motion.votes.each do |vote| %>
-      <tr>
-        <td><%= vote.user.name %></td>
-        <td><%= vote.response %></td>
-        <td><%= vote.updated_at %> (<%= time_ago_in_words(vote.updated_at) %> ago)</td>
-      </tr>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Person</td>
+            <th>Response</td>
+            <th>Updated At</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @motion.votes.each do |vote| %>
+            <tr>
+              <td><%= vote.user.name %></td>
+              <td><%= vote.response %></td>
+              <td><%= vote.updated_at %> (<%= time_ago_in_words(vote.updated_at) %> ago)</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
     <% end %>
-  </tbody>
-</table>
-
-<% end %>
+  </div>
+</div>

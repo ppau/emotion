@@ -4,9 +4,14 @@ class Motion < ActiveRecord::Base
 
   has_many :votes
 
+  validates :name, presence: true, length: { minimum: 3, maximum: 100 }
   validates :text, presence: true, length: { minimum: 100, maximum: 10_000 }
   validates :group, presence: true
   validates :user, presence: true
+
+  def to_param
+    [id, name.parameterize].join('-')
+  end
 
   def author
     user
@@ -34,6 +39,10 @@ class Motion < ActiveRecord::Base
 
   def num_votes_abstain
     votes.where(response: 'abstain').count
+  end
+
+  def percent_complete
+    (100.0 * votes.filled.count.to_f / votes.count.to_f).round(2)
   end
 
   private

@@ -49,6 +49,6 @@ class MotionsController < ApplicationController
   end
 
   def motion_params
-    params.require(:motion).permit(:text).merge(user_id: current_user.id)
+    params.require(:motion).permit(:name, :text).merge(user_id: current_user.id)
   end
 end
