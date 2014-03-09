@@ -11,6 +11,6 @@
 
   <h2 class="motion-title pull-left"><%= link_to motion.name, [motion.group, motion] %></h2>
 </div>
-<blockquote><%= motion.text %>
+<blockquote><%= simple_format motion.text %>
   <footer>created by <%= motion.author.name %> <%= time_ago_in_words(motion.created_at) %> ago</footer>
 </blockquote>
