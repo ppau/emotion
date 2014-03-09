@@ -4,18 +4,6 @@ class Vote < ActiveRecord::Base
 
   validate :user, presence: true
   validate :motion, presence: true
-  validate :response, inclusion: { in: %w(yea nay abstain) }
+  validate :response, inclusion: { in: %w(yes no abstain) }
 
-  def display_response
-    case response
-    when /yea/i
-      'yea'
-    when /nay/i
-      'nay'
-    when /abstain/i
-      'abstain'
-    else
-      'pending'
-    end
-  end
 end

@@ -12,29 +12,49 @@
 
 <p>
   <strong>Time:</strong>
-  <%= @motion.created_at %>
+  <%= @motion.created_at %> (<%= time_ago_in_words(@motion.created_at) %> ago)
 </p>
 
 <p class="actions">
 <%= link_to 'Edit', edit_group_motion_path(@group, @motion) %>
 </p>
 
+<% vote = @motion.vote_for_user(current_user) %>
+
+<% if @motion.voted?(current_user) %>
+  You have responded to this vote with: <%= vote.response %>
+<% else %>
+  You have not yet responded to this vote.
+<% end %>
+
+<div>
+<%= link_to 'Yes', group_motion_vote_yes_path(@group, @motion, vote), class: 'btn btn-lg btn-success' %>
+<%= link_to 'No', group_motion_vote_no_path(@group, @motion, vote), class: 'btn btn-lg btn-danger' %>
+<%= link_to 'Abstain', group_motion_abstain_path(@group, @motion, vote), class: 'btn btn-lg btn-default' %>
+</div>
+
 <% if @motion.votes.any? %>
 
 <h2>Votes</h2>
 
-<table>
+Yes: <%= @motion.num_votes_yes %>
+No: <%= @motion.num_votes_no %>
+Abstain: <%= @motion.num_votes_abstain %>
+
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Person</td>
       <th>Response</td>
+      <th>Updated At</td>
     </tr>
   </thead>
   <tbody>
     <% @motion.votes.each do |vote| %>
       <tr>
         <td><%= vote.user.name %></td>
-        <td><%= vote.display_response %></td>
+        <td><%= vote.response %></td>
+        <td><%= vote.updated_at %> (<%= time_ago_in_words(vote.updated_at) %> ago)</td>
       </tr>
     <% end %>
   </tbody>

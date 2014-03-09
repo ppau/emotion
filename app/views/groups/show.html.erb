@@ -10,14 +10,15 @@
       </div>
       <%= link_to [@group, motion], class: 'well' do %>
         <blockquote><%= motion.text %></blockquote>
-        <p>
+        <div class="motion-author">
         Author: <b><%= motion.author.name %></b>
-        </p>
+        </div>
+        <div class="motion-timestamp">
+          Created <%= time_ago_in_words(motion.created_at) %> ago
+        </div>
       <% end %>
     <% end %>
   <% end %>
-
-
 <% end %>
 
 <%= link_to 'New Motion', new_group_motion_path(@group), class: 'btn btn-primary' %>
