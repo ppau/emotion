@@ -1,7 +1,2 @@
-<ol class="breadcrumb">
-  <li><%= link_to 'Home', '/' %></li>
-  <li><%= link_to 'Manage groups', groups_path %></li>
-  <li><%= link_to 'New Group', new_group_path %></li>
-</ol>
-
+<%= render 'admin_breadcrumbs', current: link_to('New Group', new_group_path) %>
 <%= render 'form' %>
