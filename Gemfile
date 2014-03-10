@@ -5,6 +5,7 @@ ruby '2.1.1'
 gem 'rails', '4.1.0.rc1'
 
 gem 'bootstrap-sass'                                     # precanned baseline styles
+gem 'cancancan'                                          # user permissions
 gem 'capistrano-rails', group: :command_line             # deploy recipes
 gem 'coffee-rails'                                       # coffeescript
 gem 'cucumber', group: :test, require: false             # acceptance tests
@@ -13,6 +14,7 @@ gem 'devise'                                             # user account manageme
 gem 'email_spec', group: :test                           # nice test assertions for emails
 gem 'factory_girl_rails', group: :test                   # convenient model recipes
 gem 'guard-livereload', group: :development              # reload the web browser when source files change
+gem 'guard-rspec'                                        # rerun tests when code changes
 gem 'headless', group: :test, require: false             # lets us run firefox inside a virtual display on ci
 gem 'jazz_hands', group: [:test, :development]           # debugger and other nice stuff
 gem 'jquery-rails'                                       # jquery assets
@@ -37,6 +39,4 @@ gem 'turbolinks'                                         # faster page navigatio
 gem 'uglifier'                                           # minifier
 
 # gem 'friendly_id'
-# gem 'guard-rspec'      # rerun tests when code changes
 # gem 'metric_fu'        # static code analysis
-
