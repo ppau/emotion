@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :groups, through: :group_memberships
 
   validates :name, presence: true, length: { minimum: 3, maximum: 20 }
-  validate :role, inclusion: { in: ROLES, allow_nil: true }
+  validates :role, inclusion: { in: ROLES, allow_nil: true }
 
   def self.guest
     User.new(role: GUEST)
