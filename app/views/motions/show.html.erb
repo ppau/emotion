@@ -1,4 +1,4 @@
-<%= render 'breadcrumbs', current: link_to('Viewing Motion', [@group, @motion]) %>
+<%= render 'breadcrumbs', current: link_to(@motion.name, [@group, @motion]) %>
 
 <%= render 'item', motion: @motion, actions: true %>
 
