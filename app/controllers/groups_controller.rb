@@ -30,7 +30,6 @@ class GroupsController < ApplicationController
     end
   end
 
-  # DELETE /groups/1
   def destroy
     @group.destroy
     redirect_to groups_url, notice: 'Group was successfully destroyed.'

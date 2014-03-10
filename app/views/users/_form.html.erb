@@ -1,0 +1,16 @@
+<%= simple_form_for(@user) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name %>
+  <%= f.input :email, required: true, autofocus: true %>
+  <% if @user.persisted? %>
+    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
+  <% else %>
+    <%= f.input :password, required: true %>
+  <% end %>
+  <%= f.association :groups, as: :check_boxes %>
+  <%= f.button :submit, class: 'btn-primary' %>
+  <% if @user.persisted? %>
+    <%= link_to 'View', @user, class: 'btn btn-default' %>
+    <%= link_to 'Remove', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <% end %>
+<% end %>
