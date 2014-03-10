@@ -4,8 +4,7 @@ class Motion < ActiveRecord::Base
 
   has_many :votes
 
-  validates :name, presence: true, length: { minimum: 3, maximum: 100 }
-  validates :text, presence: true, length: { minimum: 100, maximum: 10_000 }
+  validates :name, presence: true, length: { minimum: 1, maximum: 100 }
   validates :group, presence: true
   validates :user, presence: true
 
