@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :groups, only: [:show] do
+  resources :groups do
     resources :motions, except: [:index] do
       get 'vote/yes', to: 'votes#update', as: :vote_yes, defaults: {response: 'yes'}
       get 'vote/no', to: 'votes#update', as: :vote_no, defaults: {response: 'no'}

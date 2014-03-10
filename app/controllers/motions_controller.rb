@@ -1,6 +1,7 @@
 class MotionsController < ApplicationController
   before_action :set_group
   before_action :set_motion, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource through: :group
 
   def index
     @motions = @group.motions

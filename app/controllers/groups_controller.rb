@@ -1,22 +1,20 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   def index
-    @groups = Group.all
   end
 
   def show
   end
 
   def new
-    @group = Group.new
   end
 
   def edit
   end
 
   def create
-    @group = Group.new(group_params.merge(uuid: SecureRandom.uuid))
     if @group.save
       redirect_to groups_url, notice: 'Group was successfully created.'
     else
@@ -45,6 +43,6 @@ class GroupsController < ApplicationController
   end
 
   def group_params
-    params.require(:group).permit(:name)
+    params.require(:group).permit(:name, user_ids: [])
   end
 end

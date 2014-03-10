@@ -1,16 +1,19 @@
-<div class="clearfix">
-  <div class="btn-group pull-right">
-    <% if defined? actions and actions == true %>
-      <% if motion.user == current_user %>
-        <%= link_to 'Edit', edit_group_motion_path(motion.group, motion), class: 'btn btn-default' %>
-        <%= link_to 'Close', '#', class: 'btn btn-default' %>
-        <%= link_to 'Destroy', [motion.group, motion], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+<div class="motion well">
+  <div class="clearfix">
+    <div class="btn-group pull-right">
+      <% if defined? actions and actions == true %>
+        <% if motion.user == current_user %>
+          <%= link_to 'Edit', edit_group_motion_path(motion.group, motion), class: 'btn btn-default' %>
+          <%= link_to 'Close', '#', class: 'btn btn-default' %>
+          <%= link_to 'Remove', [motion.group, motion], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
 
-  <h2 class="motion-title pull-left"><%= link_to motion.name, [motion.group, motion] %></h2>
+    <h4 class="h4 motion-title pull-left"><%= link_to motion.name, [motion.group, motion] %></h4>
+  </div>
+  <% if motion.text.present? %>
+    <blockquote><%= simple_format motion.text %></blockquote>
+  <% end %>
+  <small>created by <%= motion.author.name %> <%= time_ago_in_words(motion.created_at) %> ago</small>
 </div>
-<blockquote><%= simple_format motion.text %>
-  <footer>created by <%= motion.author.name %> <%= time_ago_in_words(motion.created_at) %> ago</footer>
-</blockquote>

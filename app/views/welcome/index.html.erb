@@ -5,18 +5,39 @@
 <% end %>
 
 <h2>Pirate Emotion</h2>
+
 <p>
-  This app manages motions in a political party.
+This app manages motions in a political party.
 </p>
 
-
 <% if current_user %>
-  <% if current_user.group_memberships.any? %>
-    <h2>Groups</h2>
-    <ul>
-      <% current_user.group_memberships.each do |membership| %>
-        <li><%= link_to membership.group.name, membership.group %></li>
-      <% end %>
-    </ul>
+  <% if can? :manage, Group %>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Admin</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <li><%= link_to 'Manage Groups', groups_path %></li>
+        </ul>
+      </div>
+    </div>
   <% end %>
+
+  <% if current_user.group_memberships.any? %>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Your Groups</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <% current_user.group_memberships.each do |membership| %>
+            <li><%= link_to membership.group.name, membership.group %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
 <% end %>

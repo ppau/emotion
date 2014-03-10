@@ -1,1 +1,1 @@
-Group.create!(name: 'Example')
+Group.create_example!

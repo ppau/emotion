@@ -1,5 +1,7 @@
-<h1>New group</h1>
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', '/' %></li>
+  <li><%= link_to 'Manage groups', groups_path %></li>
+  <li><%= link_to 'New Group', new_group_path %></li>
+</ol>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', groups_path %>

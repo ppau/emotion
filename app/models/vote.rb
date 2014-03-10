@@ -11,7 +11,7 @@ class Vote < ActiveRecord::Base
 
   validate :user, presence: true
   validate :motion, presence: true
-  validate :response, inclusion: { in: RESPONSES }
+  validate :response, inclusion: { in: RESPONSES, allow_nil: true }
 
   scope :filled, -> { where('response is not null') }
 

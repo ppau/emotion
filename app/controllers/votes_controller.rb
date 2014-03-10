@@ -2,6 +2,9 @@ class VotesController < ApplicationController
   before_action :set_group
   before_action :set_motion
   before_action :set_vote
+  load_and_authorize_resource :group
+  load_and_authorize_resource :motion, through: :group
+  load_and_authorize_resource :vote, through: :motion
 
   def update
     if @vote.update(motion_params)
