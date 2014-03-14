@@ -1,7 +1,8 @@
 <%= simple_form_for(@group) do |f| %>
   <%= f.error_notification %>
   <%= f.input :name %>
-  <%= f.association :users, :as => :check_boxes %>
+  <%= f.input :quorum_percentage, input_html: { min: 0, max: 100 } %>
+  <%= f.association :users, as: :check_boxes %>
   <%= f.button :submit, class: 'btn-primary' %>
   <% if @group.persisted? %>
     <%= link_to 'View', @group, class: 'btn btn-default' %>

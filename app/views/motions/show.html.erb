@@ -52,8 +52,8 @@
     <div class="panel-body">
 
       <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="<%= @motion.votes.filled.count %>" aria-valuemin="0" aria-valuemax="<%= %>" style="width: <%= @motion.percent_complete %>%;">
-          <%= @motion.percent_complete %>%
+        <div class="progress-bar" role="progressbar" aria-valuenow="<%= @motion.votes.filled.count %>" aria-valuemin="0" aria-valuemax="<%= %>" style="width: <%= @motion.complete_percentage %>%;">
+          <%= @motion.votes.filled.count %> of <%= @motion.quorum %> (<%= @motion.complete_percentage %>%)
         </div>
       </div>
 

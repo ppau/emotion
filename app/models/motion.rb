@@ -40,8 +40,16 @@ class Motion < ActiveRecord::Base
     votes.where(response: 'abstain').count
   end
 
-  def percent_complete
-    (100.0 * votes.filled.count.to_f / votes.count.to_f).round(2)
+  def complete_percentage
+    [100.0, 100.0 * votes.filled.count.to_f / quorum].min.floor
+  end
+
+  def quorum_percentage
+    group.quorum_percentage
+  end
+
+  def quorum
+    (group.quorum_percentage * votes.count.to_f / 100.0).ceil
   end
 
   private

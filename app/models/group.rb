@@ -8,6 +8,7 @@ class Group < ActiveRecord::Base
   accepts_nested_attributes_for :users
 
   validates :name, presence: true
+  validates :quorum_percentage, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
 
   EXAMPLE_NAME = 'Example'
 
